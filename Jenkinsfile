@@ -16,8 +16,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKER_IMAGE}:${env.BUILD_ID} ."
-                    sh "docker tag ${DOCKER_IMAGE}:${env.BUILD_ID} ${DOCKER_IMAGE}:latest"
+                    sh "sudo docker build -t ${DOCKER_IMAGE}:${env.BUILD_ID} ."
+                    sh "sudo docker tag ${DOCKER_IMAGE}:${env.BUILD_ID} ${DOCKER_IMAGE}:latest"
                 }
             }
         }
