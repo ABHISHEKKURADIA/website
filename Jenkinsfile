@@ -1,5 +1,5 @@
 pipeline {
-    agent Master
+    agent any
 
     environment {
         DOCKER_IMAGE = "abhishekkuradia/capstone-website"
