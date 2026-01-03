@@ -43,11 +43,10 @@ pipeline {
                         sh "kubectl apply -f k8s/service.yaml"
                     }
                     // Change this temporarily from "25" to today's date "03"
-                    else if (today == "03") { 
-                        echo "Testing Deployment..."
-                        sh "kubectl apply -f k8s/deployment.yaml"
-                        sh "kubectl apply -f k8s/service.yaml"
-                    }
+                    else if (today == "03") {  // Changed from 25 to 03 (Today's Date)
+                                sh "kubectl apply -f k8s/deployment.yaml"
+                                sh "kubectl apply -f k8s/service.yaml"
+                            }
                     else {
                         echo "Current day is ${today}. Release is restricted to the 25th. Skipping deployment."
                         // Optional: currentBuild.result = 'UNSTABLE'
