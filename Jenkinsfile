@@ -25,13 +25,17 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
-                    sh "echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin"
-                    sh "sudo docker push ${DOCKER_IMAGE}:${env.BUILD_ID}"
-                    sh "sudo docker push ${DOCKER_IMAGE}:latest"
+                    script {
+                        // IMPORTANT: Added 'sudo' to the login command
+                        sh "echo ${DOCKER_PASS} | sudo docker login -u ${DOCKER_USER} --password-stdin"
+                        
+                        // Now sudo has the permission to push
+                        sh "sudo docker push abhishekkuradia/capstone-website:${env.BUILD_ID}"
+                        sh "sudo docker push abhishekkuradia/capstone-website:latest"
+                    }
                 }
             }
         }
-
         stage('Deploy to K8s (Date Check)') {
             steps {
                 script {
