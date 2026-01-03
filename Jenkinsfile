@@ -41,7 +41,14 @@ pipeline {
                         echo "Today is the 25th. Proceeding with Production Release..."
                         sh "kubectl apply -f k8s/deployment.yaml"
                         sh "kubectl apply -f k8s/service.yaml"
-                    } else {
+                    }
+                    // Change this temporarily from "25" to today's date "03"
+                    else if (today == "03") { 
+                        echo "Testing Deployment..."
+                        sh "kubectl apply -f k8s/deployment.yaml"
+                        sh "kubectl apply -f k8s/service.yaml"
+                    }
+                    else {
                         echo "Current day is ${today}. Release is restricted to the 25th. Skipping deployment."
                         // Optional: currentBuild.result = 'UNSTABLE'
                     }
