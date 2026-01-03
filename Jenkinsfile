@@ -1,5 +1,5 @@
 pipeline {
-    agent K8smaster
+    agent Master
 
     environment {
         DOCKER_IMAGE = "abhishekkuradia/capstone-website"
@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://abhishekkuradia.com/website.git'
+                git branch: 'main', url: 'https://github.com/ABHISHEKKURADIA/website.git/'
             }
         }
 
